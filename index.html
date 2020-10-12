@@ -50,21 +50,21 @@ html,
 <body>
     <div id="app">
         <div>
-            <h1>Список дел:</h1>
+            <h1>To-Do:</h1>
             <textarea type="text" @keyup.enter="add" v-model='note' cols="35" rows="3"></textarea>
             <br>
             <button @click="add">
-                Добавить
+                Add
             </button>
         </div>
         <ul>
             <li v-for='(item, id) in toDo.slice().reverse()' @click='del(id)'>{{item}}<br></li>
         </ul>
         <div v-if='deleted' id="footer">
-            <h3>Последний удаленный элемент: </h3>
+            <h3>The last removed note: </h3>
             <p @click='note = deleted; deleted=""'>{{deleted}} 
             <br>
-            <u @click='deleted=""'>Удалить</u> </p>
+            <u @click='deleted=""'>del</u> </p>
         </div>
     </div>
 
