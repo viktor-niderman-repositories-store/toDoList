@@ -16,7 +16,7 @@ const createNote = () => {
 </script>
 
 <template>
-  <div>
+  <div class="todoList">
     <input type="text"   v-model="noteInput" @keyup.enter="createNote">
     <button @click="createNote">Create</button>
     <ul>
@@ -34,6 +34,9 @@ const createNote = () => {
 </template>
 
 <style scoped>
+.todoList {
+  margin: 10px;
+}
 .note {
   display: flex;
   align-items: center;
@@ -55,5 +58,6 @@ const createNote = () => {
 input, button {
   font-size: 1.5rem;
   margin-right: .5rem;
+  max-width: 60%;
 }
 </style>
