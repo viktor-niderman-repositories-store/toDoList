@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import {useToDoStore} from '@/stores/todo'
 import {ref} from "vue";
+import IconCheck from "@/components/icons/IconCheck.vue";
+import IconTrash from "@/components/icons/IconTrash.vue";
 
 const store = useToDoStore()
-const { todoList, todoAdd, todoMark, todoEdit, todoDelete } = store
+const {todoList, todoAdd, todoMark, todoEdit, todoDelete} = store
 
 const noteInput = ref('');
 const createNote = () => {
@@ -17,47 +19,86 @@ const createNote = () => {
 
 <template>
   <div class="todoList">
-    <input type="text"   v-model="noteInput" @keyup.enter="createNote">
-    <button @click="createNote">Create</button>
-    <ul>
-      <li v-for="item in todoList" class="note">
-        <div class="noteCheckbox" @click="todoMark(item.id)">
-          <span v-if="item.isCompleted">✅</span>
-        </div>
-        <div>
-          <span :class="{deleted: item.isCompleted}">{{item.note}}</span>
-          <span @click="todoDelete(item.id)" class="trash">🗑️</span>
-        </div>
-      </li>
-    </ul>
+    <div>
+      <div class="warning">
+        ⚠️ Your data is stored in the Local Store, which means that it will only be available to you in the current browser
+        for the current user.
+      </div>
+      <div class="d-flex">
+        <input type="text" v-model="noteInput" @keyup.enter="createNote">
+        <button @click="createNote" class="c-pointer">Create</button>
+      </div>
+      <ul>
+        <li v-for="item in todoList" class="note c-pointer">
+          <div class="noteCheckbox" @click="todoMark(item.id)">
+            <span v-if="item.isCompleted">
+              <IconCheck/>
+            </span>
+          </div>
+          <div class="noteText" @click="todoMark(item.id)">
+            <span :class="{deleted: item.isCompleted}">{{ item.note }}</span>
+          </div>
+          <div @click="todoDelete(item.id)" class="noteCheckbox">
+            <span>
+              <IconTrash/>
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .todoList {
-  margin: 10px;
+  width: 500px;
+  max-width: 100%;
+  margin: 1rem auto 0;
 }
+
 .note {
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin: .5rem 0;
+  background-color: #f3f3f3;
+  border-radius: .3rem;
+  padding: 0;
 }
+
 .noteCheckbox {
-  width: 26px;
-  height: 32px;
-  border: 1px solid black;
-  margin: 0 .5rem;
+  width: 24px;
+  height: 24px;
 }
+
 .deleted {
   text-decoration: line-through;
 }
-.trash {
-  padding-left: .5rem;
-}
+
 input, button {
-  font-size: 1.5rem;
-  margin-right: .5rem;
-  max-width: 60%;
+  font-size: 1rem;
+  border-radius: .3rem;
+  border: .5px solid black;
+}
+
+button {
+  padding: .3rem .5rem;
+  margin-left: 1rem;
+  background-color: #2a2929;
+  color: white;
+}
+
+input {
+  flex-grow: 1;
+}
+
+.noteText {
+  flex-grow: 1;
+}
+
+.warning {
+  margin-bottom: 1.5rem;
+  color: #5d5d5d;
+  text-align: center;
 }
 </style>

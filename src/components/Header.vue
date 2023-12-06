@@ -26,4 +26,7 @@ import {RouterLink} from "vue-router";
     color: white;
     text-decoration: none;
   }
+  .nav-item:hover {
+    text-decoration: underline;
+  }
 </style>

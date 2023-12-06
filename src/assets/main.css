@@ -3,3 +3,9 @@
     margin: 0;
     box-sizing: border-box;
 }
+.c-pointer {
+    cursor: pointer;
+}
+.d-flex {
+    display: flex;
+}
