@@ -18,6 +18,6 @@ jobs:
     - id: Build-Vue
       uses: xRealNeon/VuePagesAction@1.0.1
       with:
-        username: 'Zeref95'
+        username: 'viktor-niderman'
         reponame: 'toDoList'
-        token: ${{ secrets.GITHUB_TOKEN }} 
+        token: ${{ secrets.GITHUB_TOKEN }}
