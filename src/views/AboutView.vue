@@ -2,7 +2,7 @@
   <div class="about">
     This website was created for the purpose of gaining practical experience in development, as well as showcasing our
     skills. You can find a page there that stores information in the Local Store, and all the code is available for
-    viewing on <a href="https://github.com/Zeref95/toDoList" target="_blank">GitHub</a>.
+    viewing on <a href="https://github.com/Zeref95/viktor-niderman" target="_blank">GitHub</a>.
   </div>
 </template>
 

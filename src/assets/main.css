@@ -9,3 +9,12 @@
 .d-flex {
     display: flex;
 }
+.flex-direction-column {
+    flex-direction: column;
+}
+.grow-1 {
+    flex-grow: 1;
+}
+.fill-white {
+    fill: white;
+}
