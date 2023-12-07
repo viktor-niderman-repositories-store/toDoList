@@ -1,78 +1,64 @@
-import {ref} from 'vue'
+import type { Ref } from 'vue';
+import {ref, watch} from 'vue'
 import {defineStore} from 'pinia'
 
-let count = 0;
-
-class Note {
+interface Note {
     id: number;
-    note: string;
+    text: string;
     isCompleted: boolean;
     createdAt: Date;
-
-    constructor(text: string, storedObj:any = null) {
-        if (storedObj) {
-            this.id = storedObj.id
-            this.note = storedObj.note
-            this.isCompleted = storedObj.isCompleted
-            this.createdAt = storedObj.createdAt
-            return
-        }
-        this.id = count++
-        this.note = text;
-        this.isCompleted = false;
-        this.createdAt = new Date()
-    }
-
-    changeMark() {
-        this.isCompleted = !this.isCompleted
-    }
-
-    editNote(text: string) {
-        this.note = text
-    }
 }
 
+let currentId = 0;
+const storageKey = 'todoList';
+const createNewNote = (text:string):Note => {
+    return {
+        id: currentId++,
+        text,
+        isCompleted: false,
+        createdAt: new Date,
+    }
+}
 export const useToDoStore = defineStore('todo', () => {
-    const todoList = ref([new Note('Hello World')])
-    const storageKey = 'toDoList';
+    const todoList: Ref<Note[]> = ref([])
+
     const saveToStorage = () => {
         localStorage[storageKey] = JSON.stringify({
             todoList: todoList.value,
-            count: count
+            currentId
         })
     }
+
     const loadFromStorage = () => {
         if (localStorage[storageKey]) {
-            const storage = JSON.parse(localStorage[storageKey]);
-            todoList.value = storage.todoList.map((el:object) => new Note('', el));
-            count = storage.count
+            const storage = JSON.parse(localStorage[storageKey])
+            todoList.value = storage.todoList
+            currentId = storage.currentId
         }
     }
 
-    loadFromStorage()
-
-
-    function todoAdd(note: string) {
-        todoList.value.unshift(new Note(note))
-        saveToStorage()
+    const addTodo = (text: string) => {
+        todoList.value.unshift(createNewNote(text))
     }
 
-    function todoMark(id: number) {
-        todoList.value.find((el: Note) => el.id === id)?.changeMark()
-        saveToStorage()
+    const markTodo = (id: number) => {
+        const item = todoList.value.find((el: Note) => el.id === id)
+        if(!item) return
+        item.isCompleted = !item.isCompleted
     }
 
-    function todoEdit(id: number, text: string) {
-        todoList.value.find((el: Note) => el.id === id)?.editNote(text)
-        saveToStorage()
-    }
-
-    function todoDelete(id: number) {
+    const deleteTodo = (id: number) => {
         const i = todoList.value.findIndex((el: Note) => el.id === id)
         todoList.value.splice(i, 1)
-        saveToStorage()
     }
 
-    // const doubleCount = computed(() => count.value * 2)
-    return {todoList, todoAdd, todoMark, todoEdit, todoDelete}
+    const editTodo = (id: number, text: string) => {
+        const item = todoList.value.find((el: Note) => el.id === id)
+        if(!item) return
+        item.text = text
+    }
+
+    loadFromStorage()
+    watch(todoList, () => saveToStorage(),{ deep: true })
+    return {todoList, addTodo, markTodo, deleteTodo, editTodo}
 })

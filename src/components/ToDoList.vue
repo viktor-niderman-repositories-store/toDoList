@@ -5,13 +5,13 @@ import IconCheck from "@/components/icons/IconCheck.vue";
 import IconTrash from "@/components/icons/IconTrash.vue";
 
 const store = useToDoStore()
-const {todoList, todoAdd, todoMark, todoEdit, todoDelete} = store
+const {todoList, addTodo, markTodo, deleteTodo, editTodo} = store
 
 const noteInput = ref('');
 const createNote = () => {
   noteInput.value = noteInput.value.trim();
   if (noteInput.value) {
-    todoAdd(noteInput.value);
+    addTodo(noteInput.value);
     noteInput.value = '';
   }
 }
@@ -30,15 +30,15 @@ const createNote = () => {
       </div>
       <ul>
         <li v-for="item in todoList" class="note c-pointer">
-          <div class="noteCheckbox" @click="todoMark(item.id)">
+          <div class="noteCheckbox" @click="markTodo(item.id)">
             <span v-if="item.isCompleted">
               <IconCheck/>
             </span>
           </div>
-          <div class="noteText" @click="todoMark(item.id)">
-            <span :class="{deleted: item.isCompleted}">{{ item.note }}</span>
+          <div class="noteText" @click="markTodo(item.id)">
+            <span :class="{deleted: item.isCompleted}">{{ item.text }}</span>
           </div>
-          <div @click="todoDelete(item.id)" class="noteCheckbox">
+          <div @click="deleteTodo(item.id)" class="noteCheckbox">
             <span>
               <IconTrash/>
             </span>
@@ -54,6 +54,7 @@ const createNote = () => {
   width: 500px;
   max-width: 100%;
   margin: 1rem auto 0;
+  padding: .3rem;
 }
 
 .note {
@@ -67,8 +68,9 @@ const createNote = () => {
 }
 
 .noteCheckbox {
-  width: 24px;
+  min-width: 24px;
   height: 24px;
+  user-select: none;
 }
 
 .deleted {
@@ -94,6 +96,7 @@ input {
 
 .noteText {
   flex-grow: 1;
+  word-break: break-word;
 }
 
 .warning {
