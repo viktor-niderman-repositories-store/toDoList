@@ -6,18 +6,15 @@ import Footer from "@/components/Footer.vue";
 </script>
 
 <template>
-  <div class="d-flex flex-direction-column main">
+  <div class="flex flex-col h-vh100">
     <Header />
-    <RouterView class="grow-1 view" />
+    <RouterView class="overflow-x-scroll flex-grow" />
     <Footer />
   </div>
 </template>
 
 <style scoped>
-.main {
+.h-vh100 {
   height: 100vh;
-}
-.view {
-  overflow: scroll;
 }
 </style>

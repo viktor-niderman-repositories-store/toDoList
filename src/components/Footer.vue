@@ -3,26 +3,17 @@ import IconGitHub from "@/components/icons/IconGitHub.vue";
 </script>
 
 <template>
-  <footer>
+  <footer class="text-white bg-neutral-700 p-1 flex justify-between">
     <div></div>
     <div>© Viktor Niderman</div>
     <div>
       <a href="https://github.com/viktor-niderman" target="_blank">
-        <IconGitHub class="fill-white icon"/>
+        <IconGitHub class="fill-white icon mr-3 max-h-6"/>
       </a>
     </div>
   </footer>
 </template>
 
 <style scoped>
-footer {
-  color: white;
-  background-color: #2a2929;
-  padding: .2rem 1rem;
-  display: flex;
-  justify-content: space-between;
-}
-.icon {
-  max-height: 24px;
-}
+
 </style>

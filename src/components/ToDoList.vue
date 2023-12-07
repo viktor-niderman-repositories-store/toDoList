@@ -24,18 +24,18 @@ const createNote = () => {
         ⚠️ Your data is stored in the Local Store, which means that it will only be available to you in the current browser
         for the current user.
       </div>
-      <div class="d-flex">
-        <input type="text" v-model="noteInput" @keyup.enter="createNote">
-        <button @click="createNote" class="c-pointer">Create</button>
+      <div class="flex">
+        <input type="text" v-model="noteInput" @keyup.enter="createNote" class="flex-grow">
+        <button @click="createNote">Create</button>
       </div>
       <ul>
-        <li v-for="item in todoList" class="note c-pointer">
+        <li v-for="item in todoList" class="flex note cursor-pointer">
           <div class="noteCheckbox" @click="markTodo(item.id)">
             <span v-if="item.isCompleted">
               <IconCheck/>
             </span>
           </div>
-          <div class="noteText" @click="markTodo(item.id)">
+          <div class="flex-grow break-all" @click="markTodo(item.id)">
             <span :class="{deleted: item.isCompleted}">{{ item.text }}</span>
           </div>
           <div @click="deleteTodo(item.id)" class="noteCheckbox">
@@ -58,7 +58,6 @@ const createNote = () => {
 }
 
 .note {
-  display: flex;
   align-items: center;
   font-size: 1.2rem;
   margin: .5rem 0;
@@ -88,15 +87,6 @@ button {
   margin-left: 1rem;
   background-color: #2a2929;
   color: white;
-}
-
-input {
-  flex-grow: 1;
-}
-
-.noteText {
-  flex-grow: 1;
-  word-break: break-word;
 }
 
 .warning {
