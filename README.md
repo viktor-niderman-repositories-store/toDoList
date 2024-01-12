@@ -8,7 +8,7 @@ Simple app with
 
 ## You can use it here
 
-[Link to App](https://zeref95.github.io/toDoList/).
+[Try this App here]([https://zeref95.github.io/toDoList/](https://viktor-niderman.github.io/toDoList/)).
 
 ## Project Setup
 
