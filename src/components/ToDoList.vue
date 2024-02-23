@@ -62,9 +62,12 @@ const saveTodo = () => {
                 class="bg-neutral-700  hover:bg-neutral-500 text-white font-bold py-1 px-3 rounded ml-2">Create
         </button>
       </div>
-      <ul class="mt-4">
-        <li v-for="item in todoList" class="note flex bg-neutral-100 rounded-md cursor-pointer px-2 py-1 my-1"
-            :class="{'bg-green-100': item.isCompleted}">
+      <ul class="mt-4" v-auto-animate>
+        <li v-for="item in todoList"
+            class="note flex bg-neutral-100 rounded-md cursor-pointer px-2 py-1 my-1"
+            :class="{'bg-green-100': item.isCompleted}"
+            :key="item.id"
+        >
           <div class="icon success-icon" @click="doMarkTodo(item.id)">
             <span v-if="item.isCompleted">
               <IconCheck/>
