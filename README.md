@@ -1,5 +1,5 @@
 # ToDo List
-[Try this App here](https://viktor-niderman.github.io/toDoList/).
+<a href="https://viktor-niderman.github.io/toDoList/" target="_blank">Try this App here</a>
 
 Simple app with 
 - Vue 3 in Vite (TypeScript)
